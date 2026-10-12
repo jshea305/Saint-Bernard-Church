@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>St Bernard Church – North Kingstown, RI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1e4d2b;
+      --primary-hover: #14351d;
+      --accent-color: #800000;
+      --text-dark: #1f2937;
+      --text-muted: #4b5563;
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --radius: 8px;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Top Bar */
+    .topbar {
+      background-color: #111827;
+      color: #f3f4f6;
+      padding: 10px 24px;
+      font-size: 0.875rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .topbar-info span {
+      margin-right: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .topbar-links a {
+      color: #f3f4f6;
+      margin-left: 12px;
+      font-size: 1.1rem;
+    }
+
+    /* Navigation Bar */
+    header {
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-area img {
+      height: 48px;
+      width: auto;
+      border-radius: 4px;
+    }
+
+    .site-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item > a {
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      border-radius: var(--radius);
+      display: inline-block;
+    }
+
+    .nav-item:hover > a {
+      background-color: var(--bg-light);
+      color: var(--primary-color);
+    }
+
+    /* Submenu */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      min-width: 220px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 8px 0;
+      list-style: none;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 8px 16px;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .dropdown a:hover {
+      background-color: var(--bg-light);
+      color: var(--primary-color);
+    }
+
+    .nav-item:hover .dropdown {
+      display: block;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(rgba(30, 77, 43, 0.85), rgba(17, 24, 39, 0.85)), 
+                  url('https://www.stbernardnk.com/wp-content/uploads/church-and-parish-center.png') center/cover no-repeat;
+      color: #ffffff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      margin-bottom: 28px;
+      color: #e5e7eb;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      border: 2px solid #ffffff;
+      color: #ffffff;
+    }
+
+    .btn-outline:hover {
+      background-color: #ffffff;
+      color: var(--text-dark);
+    }
+
+    /* Main Container */
+    .content-grid {
+      max-width: 1280px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    /* Main Column */
+    .main-body {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    /* Sidebar Column */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .widget-title {
+      font-size: 1.15rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: 2px solid var(--primary-color);
+      border-color: transparent;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111827;
+      color: #9ca3af;
+      padding: 32px 24px;
+      margin-top: 60px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ffffff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none; /* Add JS or mobile menu button for production */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Info Bar -->
+  <div class="topbar">
+    <div class="topbar-info">
+      <span><i class="fas fa-map-marker-alt"></i> 275 Tower Hill Road, North Kingstown, RI 02852</span>
+      <span><i class="fas fa-phone"></i> (401) 295-0387</span>
+    </div>
+    <div class="topbar-links">
+      <a href="https://www.youtube.com/@saintbernard-northkingstow7690" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://giving.parishsoft.com/App/Giving/stbernardnk" target="_blank" title="Online Giving"><i class="fas fa-hand-holding-dollar"></i></a>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="logo-area">
+  <a href="{root}index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+    <img src="/media/st-bernard-stained-glass-window-from-getty-images.jpg" alt="St Bernard Stained Glass" style="height: 48px; width: auto; border-radius: 4px;">
+    <span class="site-title">St. Bernard Church</span>
+  </a>
+</div>
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item">
+            <a href="#">Our Parish <i class="fas fa-angle-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="parish-staff/index.html">Parish Staff</a></li>
+              <li><a href="history/index.html">History</a></li>
+              <li><a href="mission-150/index.html">Mission 150</a></li>
+              <li><a href="our-patron-saint/index.html">Our Patron Saint</a></li>
+              <li><a href="photos/index.html">Photos</a></li>
+              <li><a href="forms/index.html">Forms</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#">Ministries <i class="fas fa-angle-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="community-outreach/index.html">Community Outreach</a></li>
+              <li><a href="knight-of-columbus/index.html">Knights of Columbus</a></li>
+              <li><a href="liturgy/index.html">Liturgy</a></li>
+              <li><a href="scholarships/index.html">Scholarships</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="faith-formation/index.html">Faith Formation</a></li>
+          <li class="nav-item"><a href="baptism/index.html">Baptism</a></li>
+          <li class="nav-item"><a href="https://www.jppc.net/onlinebulletins/9020template.pdf" target="_blank">Bulletins</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to Our Parish</h2>
+      <p>St. Bernard’s is a stewardship parish dedicated to growing in faith, serving our local community, and sharing the Gospel of Jesus Christ.</p>
+      <div class="hero-actions">
+        <a href="https://giving.parishsoft.com/App/Giving/stbernardnk" target="_blank" class="btn btn-primary"><i class="fas fa-heart"></i> Online Giving</a>
+        <a href="https://www.stbernardnk.com/wp-content/uploads/parish-registration-form-9-22-2020.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-user-plus"></i> Join Our Parish</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Grid Content -->
+  <div class="content-grid">
+    
+    <!-- Left Column: Core Announcements & Mission -->
+    <main class="main-body">
+      
+      <article class="card">
+        <h3 class="section-title">Welcome Message</h3>
+        <p>St. Bernard’s provides parishioners with opportunities to use their gifts of time, talent, and treasure to deepen their relationship with God. We offer a variety of ministries that provide spiritual, emotional, and physical support to parishioners and the surrounding community.</p>
+        <br>
+        <p>If you are a new parishioner, please download our <a href="https://www.stbernardnk.com/wp-content/uploads/parish-registration-form-9-22-2020.pdf" target="_blank">Parish Registration Form</a> and drop it off at the office or place it in the collection basket on Sunday.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="section-title">Mission Statement</h3>
+        <p>Since its founding in 1874, the parishioners of St. Bernard Church have worked together to remain faithful to their mission. We strive to live in accordance with the Gospel and are challenged to love God and neighbor by bringing the Gospel to everyone. We encourage response to our baptismal call, full participation in the life of the Church, and promotion of moral and social teachings.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="section-title">Watch Mass Online</h3>
+        <p>Live stream services and video recordings are available for parishioners unable to attend in person.</p>
+        <br>
+        <a href="https://olmparish.org/news/2020/3/30/olm-live-streaming-schedule" target="_blank" class="btn btn-primary"><i class="fas fa-video"></i> View Mass Stream</a>
+      </article>
+
+    </main>
+
+    <!-- Right Column: Sidebar Widgets -->
+    <aside class="sidebar">
+      
+      <div class="card">
+        <h4 class="widget-title">Weekly Mass Schedule</h4>
+        <p><strong>Saturday Vigil:</strong> 5:00 PM</p>
+        <p><strong>Sunday:</strong> 7:00 AM, 8:30 AM, 10:30 AM</p>
+        <br>
+        <p><strong>Weekdays:</strong> 8:00 AM (Mon – Fri)</p>
+        <p><strong>Holy Days:</strong> 8:00 AM & 7:00 PM</p>
+        <br>
+        <p><strong>Adoration:</strong> Tuesdays after 8:00 AM Mass until 11:00 AM</p>
+      </div>
+
+      <div class="card">
+        <h4 class="widget-title">Parish Office Hours</h4>
+        <p><strong>Mon – Tue:</strong> 9:00 AM – 4:00 PM</p>
+        <p><strong>Wed:</strong> 9:00 AM – 12:00 PM</p>
+        <p><strong>Thu – Fri:</strong> Closed</p>
+        <br>
+        <p><em>Summer Hours (July – August):</em><br>Mon – Tue: 9:00 AM – 3:00 PM</p>
+      </div>
+
+      <div class="card">
+        <h4 class="widget-title">Contact Us</h4>
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Your Full Name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="4" required placeholder="How can we help?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+        </form>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; St. Bernard Church – North Kingstown, RI. Proudly Hosted and Designed by <a href="https://www.jppc.net/" target="_blank">John Patrick Publishing Company</a>.</p>
+  </footer>
+
+</body>
+</html>
